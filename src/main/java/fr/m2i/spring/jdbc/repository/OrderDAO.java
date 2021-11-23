@@ -105,7 +105,7 @@ public class OrderDAO {
 	}
 
 	/**
-	 * Exercice 6 --> Execute ne retourne pas de r�sultat
+	 * Exercice 6 --> Execute ne retourne pas de résultat
 	 */
 	public void addOrderUsingExecuteMethod() {
 		jdbcTemplate.execute("INSERT INTO ORDERS VALUES (6, 'Commande 6', 500, 3, 20.0, 'Terminee', 'Forfait', 'Les notes de la commande 6', 1)");
@@ -163,7 +163,7 @@ public class OrderDAO {
 
 			@Override
 			public int getBatchSize() {
-				return 3;
+				return orders.size();
 			}
 		});
 	}

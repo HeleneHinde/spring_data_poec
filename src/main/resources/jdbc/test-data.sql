@@ -13,3 +13,5 @@ INSERT INTO orders (id, customer_id, label, adr_et, number_of_days, tva, status,
 INSERT INTO orders (id, customer_id, label, adr_et, number_of_days, tva, status, type, notes) VALUES (2, 1, 'Formation Spring', 450.0, 3, 20.0, 'En attente', 'Forfait', 'Test');
 
 INSERT INTO orders (id, customer_id, label, adr_et, number_of_days, tva, status, type, notes) VALUES (3, 2, 'Formation Jedi', 1500.0, 2, 20.0, 'Payée', 'Forfait', 'Notes sur la formation');
+
+INSERT INTO users (id, username, password, mail, grants) VALUES (1, 'toto', '1234', 'toto.titi@toto.com', 'ADMIN');
