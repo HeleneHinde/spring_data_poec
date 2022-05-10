@@ -1,4 +1,4 @@
-package fr.m2i.spring.jdbc.config;
+package fr.wijin.spring.jdbc.config;
 
 import javax.sql.DataSource;
 
@@ -10,7 +10,7 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 @Configuration
-@ComponentScan(basePackages={"fr.m2i.spring.jdbc.repository"})
+@ComponentScan(basePackages={"fr.wijin.spring.jdbc.repository"})
 public class AppConfig {
 
 	@Bean
@@ -20,7 +20,7 @@ public class AppConfig {
 	      .addScript("classpath:jdbc/schema.sql")
 	      .addScript("classpath:jdbc/test-data.sql").build();
 	}
-	
+
 	/**
 	@Bean
     public DataSource mysqlDataSource() {

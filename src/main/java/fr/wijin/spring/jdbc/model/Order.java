@@ -1,4 +1,4 @@
-package fr.m2i.spring.jdbc.model;
+package fr.wijin.spring.jdbc.model;
 
 import java.io.Serializable;
 

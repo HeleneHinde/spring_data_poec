@@ -1,4 +1,4 @@
-package fr.m2i.spring.jdbc.repository;
+package fr.wijin.spring.jdbc.repository;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -19,8 +19,8 @@ import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
-import fr.m2i.spring.jdbc.mapper.OrderRowMapper;
-import fr.m2i.spring.jdbc.model.Order;
+import fr.wijin.spring.jdbc.mapper.OrderRowMapper;
+import fr.wijin.spring.jdbc.model.Order;
 
 @Repository
 public class OrderDAO {

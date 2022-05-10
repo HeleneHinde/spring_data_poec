@@ -1,12 +1,12 @@
-package fr.m2i.spring.jdbc.mapper;
+package fr.wijin.spring.jdbc.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import fr.m2i.spring.jdbc.model.Customer;
-import fr.m2i.spring.jdbc.model.Order;
+import fr.wijin.spring.jdbc.model.Customer;
+import fr.wijin.spring.jdbc.model.Order;
 
 public class OrderRowMapper implements RowMapper<Order> {
 

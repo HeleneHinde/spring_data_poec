@@ -1,4 +1,4 @@
-package fr.m2i.spring.jdbc;
+package fr.wijin.spring.jdbc;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,10 +12,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
-import fr.m2i.spring.jdbc.config.AppConfig;
-import fr.m2i.spring.jdbc.model.Customer;
-import fr.m2i.spring.jdbc.model.Order;
-import fr.m2i.spring.jdbc.repository.OrderDAO;
+import fr.wijin.spring.jdbc.config.AppConfig;
+import fr.wijin.spring.jdbc.model.Customer;
+import fr.wijin.spring.jdbc.model.Order;
+import fr.wijin.spring.jdbc.repository.OrderDAO;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = { AppConfig.class }, loader = AnnotationConfigContextLoader.class)

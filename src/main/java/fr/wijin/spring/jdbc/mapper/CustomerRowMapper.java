@@ -1,11 +1,11 @@
-package fr.m2i.spring.jdbc.mapper;
+package fr.wijin.spring.jdbc.mapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
 
-import fr.m2i.spring.jdbc.model.Customer;
+import fr.wijin.spring.jdbc.model.Customer;
 
 public class CustomerRowMapper implements RowMapper<Customer> {
 

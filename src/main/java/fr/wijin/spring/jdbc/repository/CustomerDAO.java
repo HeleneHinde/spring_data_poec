@@ -1,4 +1,4 @@
-package fr.m2i.spring.jdbc.repository;
+package fr.wijin.spring.jdbc.repository;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -21,8 +21,8 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.stereotype.Repository;
 
-import fr.m2i.spring.jdbc.mapper.CustomerRowMapper;
-import fr.m2i.spring.jdbc.model.Customer;
+import fr.wijin.spring.jdbc.mapper.CustomerRowMapper;
+import fr.wijin.spring.jdbc.model.Customer;
 
 @Repository
 public class CustomerDAO {

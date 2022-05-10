@@ -1,4 +1,4 @@
-package fr.m2i.spring.jdbc.repository;
+package fr.wijin.spring.jdbc.repository;
 
 import java.sql.SQLException;
 

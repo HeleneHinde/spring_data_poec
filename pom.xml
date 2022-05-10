@@ -2,18 +2,18 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.m2i.spring.jdbc</groupId>
+	<groupId>fr.wijin.spring.jdbc</groupId>
 	<artifactId>spring-jdbc-tutorial</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<spring-version>5.3.13</spring-version>
+		<spring-version>5.3.19</spring-version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.junit</groupId>
 				<artifactId>junit-bom</artifactId>
-				<version>5.8.1</version>
+				<version>5.8.2</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
@@ -62,9 +62,9 @@
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.10.1</version>
 				<configuration>
-					<release>11</release>
+					<release>17</release>
 				</configuration>
 			</plugin>
 		</plugins>
