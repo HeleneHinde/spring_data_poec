@@ -6,7 +6,7 @@
 	<artifactId>spring-jdbc-tutorial</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<spring-version>5.3.19</spring-version>
+		<spring-version>5.3.20</spring-version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
