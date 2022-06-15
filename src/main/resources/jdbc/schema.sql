@@ -1,8 +1,8 @@
 CREATE TABLE CUSTOMERS
 (
 	ID INT NOT NULL PRIMARY KEY,
-	FIRST_NAME varchar(50),
-	LAST_NAME varchar(50),
+	FIRSTNAME varchar(50),
+	LASTNAME varchar(50),
 	COMPANY varchar(50),
 	MAIL varchar(50),
 	PHONE VARCHAR(15),

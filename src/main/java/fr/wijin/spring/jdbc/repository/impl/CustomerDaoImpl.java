@@ -1,4 +1,4 @@
-package fr.wijin.spring.jdbc.repository;
+package fr.wijin.spring.jdbc.repository.impl;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -17,15 +17,15 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.stereotype.Repository;
 
 import fr.wijin.spring.jdbc.mapper.CustomerRowMapper;
 import fr.wijin.spring.jdbc.model.Customer;
+import fr.wijin.spring.jdbc.repository.CustomSQLErrorCodeTranslator;
+import fr.wijin.spring.jdbc.repository.CustomerDao;
 
 @Repository
-public class CustomerDAO {
+public class CustomerDaoImpl implements CustomerDao {
 
 	private JdbcTemplate jdbcTemplate;
 
@@ -69,9 +69,8 @@ public class CustomerDAO {
 	 * @return
 	 */
 	public int addCustomer(final int id) {
-		return jdbcTemplate.update("INSERT INTO CUSTOMERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", 
-				id, "James", "Bond", "MI6", "james.bond@mi6.uk",
-				"0101010101", "0606060606", "Les notes de James", true);
+		return jdbcTemplate.update("INSERT INTO CUSTOMERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", id, "James", "Bond",
+				"MI6", "james.bond@mi6.uk", "0101010101", "0606060606", "Les notes de James", true);
 	}
 
 	/**
@@ -83,15 +82,15 @@ public class CustomerDAO {
 	public int addCustomerUsingSimpleJdbcInsert(final Customer customer) {
 		final Map<String, Object> parameters = new HashMap<>();
 		parameters.put("ID", customer.getId());
-		parameters.put("FIRST_NAME", customer.getFirstname());
-		parameters.put("LAST_NAME", customer.getLastname());
+		parameters.put("FIRSTNAME", customer.getFirstname());
+		parameters.put("LASTNAME", customer.getLastname());
 		parameters.put("COMPANY", customer.getCompany());
 		parameters.put("MAIL", customer.getMail());
 		parameters.put("PHONE", customer.getPhone());
 		parameters.put("MOBILE", customer.getMobile());
 		parameters.put("NOTES", customer.getNotes());
 		parameters.put("ACTIVE", customer.isActive());
-		
+
 		return simpleJdbcInsert.execute(parameters);
 	}
 
@@ -110,7 +109,8 @@ public class CustomerDAO {
 	 * Exercice 6 --> Execute ne retourne pas de résultat
 	 */
 	public void addCustomerUsingExecuteMethod() {
-		jdbcTemplate.execute("INSERT INTO CUSTOMERS VALUES (6, 'James', 'Bond', 'MI6', 'james.bond@mi6.uk', '0101010101', '0606060606', 'Les notes de James', true)");
+		jdbcTemplate.execute(
+				"INSERT INTO CUSTOMERS VALUES (6, 'James', 'Bond', 'MI6', 'james.bond@mi6.uk', '0101010101', '0606060606', 'Les notes de James', true)");
 	}
 
 	/**
@@ -121,7 +121,7 @@ public class CustomerDAO {
 	public String getCustomerUsingMapSqlParameterSource() {
 		final SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", 1);
 
-		return namedParameterJdbcTemplate.queryForObject("SELECT FIRST_NAME FROM CUSTOMERS WHERE ID = :id",
+		return namedParameterJdbcTemplate.queryForObject("SELECT FIRSTNAME FROM CUSTOMERS WHERE ID = :id",
 				namedParameters, String.class);
 	}
 
@@ -134,7 +134,7 @@ public class CustomerDAO {
 		final Customer customer = new Customer();
 		customer.setFirstname("Indiana");
 
-		final String SELECT_BY_FIRST_NAME = "SELECT COUNT(*) FROM CUSTOMERS WHERE FIRST_NAME = :firstname";
+		final String SELECT_BY_FIRST_NAME = "SELECT COUNT(*) FROM CUSTOMERS WHERE FIRSTNAME = :firstname";
 
 		final SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(customer);
 
@@ -148,26 +148,27 @@ public class CustomerDAO {
 	 * @return
 	 */
 	public int[] batchUpdateUsingJDBCTemplate(final List<Customer> customers) {
-		return jdbcTemplate.batchUpdate("INSERT INTO CUSTOMERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", new BatchPreparedStatementSetter() {
+		return jdbcTemplate.batchUpdate("INSERT INTO CUSTOMERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				new BatchPreparedStatementSetter() {
 
-			@Override
-			public void setValues(final PreparedStatement ps, final int i) throws SQLException {
-				ps.setInt(1, customers.get(i).getId());
-				ps.setString(2, customers.get(i).getFirstname());
-				ps.setString(3, customers.get(i).getLastname());
-				ps.setString(4, customers.get(i).getCompany());
-				ps.setString(5, customers.get(i).getMail());
-				ps.setString(6, customers.get(i).getPhone());
-				ps.setString(7, customers.get(i).getMobile());
-				ps.setString(8, customers.get(i).getNotes());
-				ps.setBoolean(9, customers.get(i).isActive());
-			}
+					@Override
+					public void setValues(final PreparedStatement ps, final int i) throws SQLException {
+						ps.setInt(1, customers.get(i).getId());
+						ps.setString(2, customers.get(i).getFirstname());
+						ps.setString(3, customers.get(i).getLastname());
+						ps.setString(4, customers.get(i).getCompany());
+						ps.setString(5, customers.get(i).getMail());
+						ps.setString(6, customers.get(i).getPhone());
+						ps.setString(7, customers.get(i).getMobile());
+						ps.setString(8, customers.get(i).getNotes());
+						ps.setBoolean(9, customers.get(i).isActive());
+					}
 
-			@Override
-			public int getBatchSize() {
-				return 3;
-			}
-		});
+					@Override
+					public int getBatchSize() {
+						return 3;
+					}
+				});
 	}
 
 	/**
@@ -178,8 +179,9 @@ public class CustomerDAO {
 	 */
 	public int[] batchUpdateUsingNamedParameterJDBCTemplate(final List<Customer> customers) {
 		final SqlParameterSource[] batch = SqlParameterSourceUtils.createBatch(customers.toArray());
-		return namedParameterJdbcTemplate
-				.batchUpdate("INSERT INTO CUSTOMERS VALUES (:id, :firstname, :lastname, :company, :mail, :phone, :mobile, :notes, :active)", batch);
+		return namedParameterJdbcTemplate.batchUpdate(
+				"INSERT INTO CUSTOMERS VALUES (:id, :firstname, :lastname, :company, :mail, :phone, :mobile, :notes, :active)",
+				batch);
 	}
 
 }

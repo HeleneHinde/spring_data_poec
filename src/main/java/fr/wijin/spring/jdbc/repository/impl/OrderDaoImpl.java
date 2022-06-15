@@ -1,4 +1,4 @@
-package fr.wijin.spring.jdbc.repository;
+package fr.wijin.spring.jdbc.repository.impl;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -21,9 +21,11 @@ import org.springframework.stereotype.Repository;
 
 import fr.wijin.spring.jdbc.mapper.OrderRowMapper;
 import fr.wijin.spring.jdbc.model.Order;
+import fr.wijin.spring.jdbc.repository.CustomSQLErrorCodeTranslator;
+import fr.wijin.spring.jdbc.repository.OrderDao;
 
 @Repository
-public class OrderDAO {
+public class OrderDaoImpl implements OrderDao {
 
 	private JdbcTemplate jdbcTemplate;
 
@@ -67,9 +69,8 @@ public class OrderDAO {
 	 * @return
 	 */
 	public int addOrder(final int id) {
-		return jdbcTemplate.update("INSERT INTO ORDERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", 
-				id, "Commande 0", 450, 5, 20.0,
-				"En cours", "Forfait", "Les notes de la commande", 1);
+		return jdbcTemplate.update("INSERT INTO ORDERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", id, "Commande 0", 450, 5,
+				20.0, "En cours", "Forfait", "Les notes de la commande", 1);
 	}
 
 	/**
@@ -89,7 +90,7 @@ public class OrderDAO {
 		parameters.put("TYPE", order.getType());
 		parameters.put("NOTES", order.getNotes());
 		parameters.put("CUSTOMER_ID", order.getCustomer().getId());
-		
+
 		return simpleJdbcInsert.execute(parameters);
 	}
 
@@ -108,7 +109,8 @@ public class OrderDAO {
 	 * Exercice 6 --> Execute ne retourne pas de résultat
 	 */
 	public void addOrderUsingExecuteMethod() {
-		jdbcTemplate.execute("INSERT INTO ORDERS VALUES (6, 'Commande 6', 500, 3, 20.0, 'Terminee', 'Forfait', 'Les notes de la commande 6', 1)");
+		jdbcTemplate.execute(
+				"INSERT INTO ORDERS VALUES (6, 'Commande 6', 500, 3, 20.0, 'Terminee', 'Forfait', 'Les notes de la commande 6', 1)");
 	}
 
 	/**
@@ -119,8 +121,8 @@ public class OrderDAO {
 	public String getOrderUsingMapSqlParameterSource() {
 		final SqlParameterSource namedParameters = new MapSqlParameterSource().addValue("id", 1);
 
-		return namedParameterJdbcTemplate.queryForObject("SELECT LABEL FROM ORDERS WHERE ID = :id",
-				namedParameters, String.class);
+		return namedParameterJdbcTemplate.queryForObject("SELECT LABEL FROM ORDERS WHERE ID = :id", namedParameters,
+				String.class);
 	}
 
 	/**
@@ -146,26 +148,27 @@ public class OrderDAO {
 	 * @return
 	 */
 	public int[] batchUpdateUsingJDBCTemplate(final List<Order> orders) {
-		return jdbcTemplate.batchUpdate("INSERT INTO ORDERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)", new BatchPreparedStatementSetter() {
+		return jdbcTemplate.batchUpdate("INSERT INTO ORDERS VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				new BatchPreparedStatementSetter() {
 
-			@Override
-			public void setValues(final PreparedStatement ps, final int i) throws SQLException {
-				ps.setInt(1, orders.get(i).getId());
-				ps.setString(2, orders.get(i).getLabel());
-				ps.setDouble(3, orders.get(i).getAdrEt());
-				ps.setDouble(4, orders.get(i).getNumberOfDays());
-				ps.setDouble(5, orders.get(i).getTva());
-				ps.setString(6, orders.get(i).getStatus());
-				ps.setString(7, orders.get(i).getType());
-				ps.setString(8, orders.get(i).getNotes());
-				ps.setInt(9, orders.get(i).getCustomer().getId());
-			}
+					@Override
+					public void setValues(final PreparedStatement ps, final int i) throws SQLException {
+						ps.setInt(1, orders.get(i).getId());
+						ps.setString(2, orders.get(i).getLabel());
+						ps.setDouble(3, orders.get(i).getAdrEt());
+						ps.setDouble(4, orders.get(i).getNumberOfDays());
+						ps.setDouble(5, orders.get(i).getTva());
+						ps.setString(6, orders.get(i).getStatus());
+						ps.setString(7, orders.get(i).getType());
+						ps.setString(8, orders.get(i).getNotes());
+						ps.setInt(9, orders.get(i).getCustomer().getId());
+					}
 
-			@Override
-			public int getBatchSize() {
-				return orders.size();
-			}
-		});
+					@Override
+					public int getBatchSize() {
+						return orders.size();
+					}
+				});
 	}
 
 	/**
@@ -176,8 +179,9 @@ public class OrderDAO {
 	 */
 	public int[] batchUpdateUsingNamedParameterJDBCTemplate(final List<Order> orders) {
 		final SqlParameterSource[] batch = SqlParameterSourceUtils.createBatch(orders.toArray());
-		return namedParameterJdbcTemplate
-				.batchUpdate("INSERT INTO ORDERS VALUES (:id, :label, :adrEt, :numberOfDays, :tva, :status, :type, :notes, :customer.id)", batch);
+		return namedParameterJdbcTemplate.batchUpdate(
+				"INSERT INTO ORDERS VALUES (:id, :label, :adrEt, :numberOfDays, :tva, :status, :type, :notes, :customer.id)",
+				batch);
 	}
 
 }

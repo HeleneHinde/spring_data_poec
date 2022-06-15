@@ -24,8 +24,8 @@ public class Order implements Serializable {
 		super();
 	}
 
-	public Order(Integer id, String label, Double adrEt, Double numberOfDays, Double tva, String status,
-			String type, String notes, Customer customer) {
+	public Order(Integer id, String label, Double adrEt, Double numberOfDays, Double tva, String status, String type,
+			String notes, Customer customer) {
 		this.id = id;
 		this.label = label;
 		this.adrEt = adrEt;

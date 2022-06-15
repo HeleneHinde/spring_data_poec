@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class Customer implements Serializable {
-	
+
 	/**
 	 * 
 	 */
@@ -19,15 +19,15 @@ public class Customer implements Serializable {
 	private String mobile;
 	private String notes;
 	private Boolean active;
-	
+
 	private List<Order> orders;
-	
+
 	public Customer() {
 		super();
 	}
 
-	public Customer(Integer id, String lastname, String firstname, String company, String mail, String phone, String mobile,
-			String notes, Boolean active) {
+	public Customer(Integer id, String lastname, String firstname, String company, String mail, String phone,
+			String mobile, String notes, Boolean active) {
 		super();
 		this.id = id;
 		this.lastname = lastname;
@@ -39,11 +39,11 @@ public class Customer implements Serializable {
 		this.notes = notes;
 		this.active = active;
 	}
-	
+
 	public Integer getId() {
 		return id;
 	}
-	
+
 	public void setId(Integer id) {
 		this.id = id;
 	}
@@ -79,7 +79,7 @@ public class Customer implements Serializable {
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
-	
+
 	public String getPhone() {
 		return phone;
 	}
@@ -103,11 +103,11 @@ public class Customer implements Serializable {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
-	
+
 	public Boolean isActive() {
 		return active;
 	}
-	
+
 	public Boolean getActive() {
 		return active;
 	}

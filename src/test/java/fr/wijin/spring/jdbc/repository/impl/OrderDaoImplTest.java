@@ -1,4 +1,4 @@
-package fr.wijin.spring.jdbc;
+package fr.wijin.spring.jdbc.repository.impl;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,14 +15,14 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
 import fr.wijin.spring.jdbc.config.AppConfig;
 import fr.wijin.spring.jdbc.model.Customer;
 import fr.wijin.spring.jdbc.model.Order;
-import fr.wijin.spring.jdbc.repository.OrderDAO;
+import fr.wijin.spring.jdbc.repository.OrderDao;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = { AppConfig.class }, loader = AnnotationConfigContextLoader.class)
-class OrderDAOTest {
+class OrderDaoImplTest {
 
 	@Autowired
-	private OrderDAO orderDao;
+	private OrderDao orderDao;
 
 	/**
 	 * Exercice 1
