@@ -27,7 +27,7 @@ class CustomerDaoImplTest {
 	 * Exercice 1
 	 */
 	@Test
-	void testGetCountOfEmployees() {
+	void testGetCountOfCustomers() {
 		Assertions.assertEquals(9, customerDao.getCountOfCustomers());
 	}
 
@@ -198,7 +198,7 @@ class CustomerDaoImplTest {
 		customer3.setMobile("mobile6");
 		customer3.setNotes("notes6");
 		customer3.setActive(true);
-		
+
 		customers.add(customer1);
 		customers.add(customer2);
 		customers.add(customer3);

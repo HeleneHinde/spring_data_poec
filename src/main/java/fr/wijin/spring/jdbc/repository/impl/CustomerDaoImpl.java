@@ -102,7 +102,7 @@ public class CustomerDaoImpl implements CustomerDao {
 	 */
 	public Customer getCustomer(final int id) {
 		final String query = "SELECT * FROM CUSTOMERS WHERE ID = ?";
-		return jdbcTemplate.queryForObject(query, new CustomerRowMapper(), new Object[] { id });
+		return jdbcTemplate.queryForObject(query, new CustomerRowMapper(), id);
 	}
 
 	/**
