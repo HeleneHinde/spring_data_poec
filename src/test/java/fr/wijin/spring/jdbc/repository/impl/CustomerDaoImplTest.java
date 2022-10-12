@@ -4,7 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -18,6 +21,7 @@ import fr.wijin.spring.jdbc.repository.CustomerDao;
 
 @ExtendWith(SpringExtension.class)
 @ContextConfiguration(classes = { AppConfig.class }, loader = AnnotationConfigContextLoader.class)
+@TestMethodOrder(OrderAnnotation.class)
 class CustomerDaoImplTest {
 
 	@Autowired
@@ -27,14 +31,16 @@ class CustomerDaoImplTest {
 	 * Exercice 1
 	 */
 	@Test
+	@Order(1)
 	void testGetCountOfCustomers() {
-		Assertions.assertEquals(9, customerDao.getCountOfCustomers());
+		Assertions.assertEquals(4, customerDao.getCountOfCustomers());
 	}
 
 	/**
 	 * Exercice 2
 	 */
 	@Test
+	@Order(2)
 	void testQueryMethod() {
 		Assertions.assertEquals(4, customerDao.getAllCustomers().size());
 	}
