@@ -6,14 +6,14 @@
 	<artifactId>spring-jdbc-tutorial</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<properties>
-		<spring-version>6.1.3</spring-version>
+		<spring-version>6.1.5</spring-version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>org.junit</groupId>
 				<artifactId>junit-bom</artifactId>
-				<version>5.10.1</version>
+				<version>5.10.2</version>
 				<type>pom</type>
 				<scope>import</scope>
 			</dependency>
