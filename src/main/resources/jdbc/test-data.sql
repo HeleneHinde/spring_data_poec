@@ -1,12 +1,12 @@
 
 
-INSERT INTO customers (id, lastname, firstname, company, mail, mobile, notes, active) VALUES (1, 'JONES', 'Indiana', 'Université de Chicago', 'indiana.jonas@univ-chicago.com', '0666666666', 'Les notes d''Indiana', true);
+INSERT INTO customers (lastname, firstname, company, mail, mobile, notes, active) VALUES ('JONES', 'Indiana', 'Université de Chicago', 'indiana.jonas@univ-chicago.com', '0666666666', 'Les notes d''Indiana', true);
 
-INSERT INTO customers (id, lastname, firstname, company, mail, mobile, notes, active) VALUES (2, 'KENOBI', 'Obi-Wan', 'Jedis', 'obiwan.kenobi@jedis.com', '0666666666', 'Les notes d''Obi Wan', true);
+INSERT INTO customers (lastname, firstname, company, mail, mobile, notes, active) VALUES ('KENOBI', 'Obi-Wan', 'Jedis', 'obiwan.kenobi@jedis.com', '0666666666', 'Les notes d''Obi Wan', true);
 
-INSERT INTO customers (id, lastname, firstname, company, mail, mobile, notes, active) VALUES (3, 'MCCLANE', 'John', 'NYPD', 'john.mcclane@nypd.com', '0666666666', 'Les notes de John', false);
+INSERT INTO customers (lastname, firstname, company, mail, mobile, notes, active) VALUES ('MCCLANE', 'John', 'NYPD', 'john.mcclane@nypd.com', '0666666666', 'Les notes de John', false);
 
-INSERT INTO customers (id, lastname, firstname, company, mail, mobile, notes, active) VALUES (4, 'MCFLY', 'Marty', 'DOC', 'marty.mcfly@doc.com', NULL, 'Les notes de Marty', false);
+INSERT INTO customers (lastname, firstname, company, mail, mobile, notes, active) VALUES ('MCFLY', 'Marty', 'DOC', 'marty.mcfly@doc.com', NULL, 'Les notes de Marty', false);
 
 INSERT INTO orders (id, customer_id, label, adr_et, number_of_days, tva, status, type, notes) VALUES (1, 1, 'Formation Java', 450.0, 5, 20, 'En cours', 'Forfait', 'Test');
 

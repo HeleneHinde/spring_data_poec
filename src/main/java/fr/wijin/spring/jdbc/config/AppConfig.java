@@ -6,26 +6,45 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 
 @Configuration
-@ComponentScan(basePackages = { "fr.wijin.spring.jdbc.repository" })
+@ComponentScan("fr.wijin.spring.jdbc")
 public class AppConfig {
 
-	@Bean
-	public DataSource dataSource() {
-		return new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).addScript("classpath:jdbc/schema.sql")
-				.addScript("classpath:jdbc/test-data.sql").build();
+
+	//@Bean
+	public DataSource getDataSourcePG() {
+		var ds = new DriverManagerDataSource();
+		ds.setDriverClassName(org.postgresql.Driver.class.getName());
+		ds.setUrl("jdbc:postgresql://localhost:5432/mabase");
+		ds.setUsername("user");
+		ds.setPassword("poec2025");
+		ds.setSchema("springdata");
+		return ds;
 	}
 
-	/**
-	 * @Bean public DataSource mysqlDataSource() { DriverManagerDataSource
-	 *       dataSource = new DriverManagerDataSource();
-	 *       dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-	 *       dataSource.setUrl("jdbc:mysql://localhost:3306/springjdbc");
-	 *       dataSource.setUsername("guest_user");
-	 *       dataSource.setPassword("guest_password"); return dataSource; }
-	 */
+	@Bean
+	public DataSource getDataSource() {
+		var ds = new DriverManagerDataSource();
+		ds.setDriverClassName(
+				org.h2.Driver.class.getName());
+		// "org.h2.Driver"
+		ds.setUsername("sa");
+		ds.setPassword("");
+		/*
+		 * ds.setUrl("jdbc:h2:mem:launcher" +
+		 * ";INIT=RUNSCRIPT FROM "
+		 * + "'classpath:/jdbc/schema.sql'"
+		 * + "\\;RUNSCRIPT FROM "
+		 * + "'classpath:/jdbc/test-data.sql'");
+		 */
+		/* ds.setUrl("jdbc:h2:file:./launcher" +
+				";INIT=RUNSCRIPT FROM "
+				+ "'classpath:/jdbc/schema.sql'"
+				+ "\\;RUNSCRIPT FROM "
+				+ "'classpath:/jdbc/test-data.sql'"); */
+		ds.setUrl("jdbc:h2:file:./launcher");
+		return ds;
+	}
 
 }

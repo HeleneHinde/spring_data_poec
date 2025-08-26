@@ -4,26 +4,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
 
 import fr.wijin.spring.jdbc.model.Customer;
 
-public class CustomerRowMapper implements RowMapper<Customer> {
+ @Component
+public class CustomerRowMapper implements RowMapper <Customer>{
 
-	@Override
-	public Customer mapRow(final ResultSet rs, final int rowNum) throws SQLException {
-		final Customer customer = new Customer();
-
-		customer.setId(rs.getInt("ID"));
-		customer.setFirstname(rs.getString("FIRSTNAME"));
-		customer.setLastname(rs.getString("LASTNAME"));
-		customer.setCompany(rs.getString("COMPANY"));
-		customer.setMail(rs.getString("MAIL"));
-		customer.setPhone(rs.getString("PHONE"));
-		customer.setMobile(rs.getString("MOBILE"));
-		customer.setNotes(rs.getString("NOTES"));
-		customer.setActive(rs.getBoolean("ACTIVE"));
-
-		return customer;
-	}
-
+    public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
+        Customer customer = new Customer();
+        customer.setId(rs.getInt("ID"));
+        customer.setFirstname(rs.getString("FIRSTNAME"));
+        customer.setLastname(rs.getString("LASTNAME"));
+        customer.setMail(rs.getString("MAIL"));
+        customer.setPhone(rs.getString("PHONE"));
+        customer.setCompany(rs.getString("COMPANY"));
+        customer.setActive(rs.getBoolean("ACTIVE"));
+        customer.setNotes(rs.getString("NOTES"));
+        return customer;
+    }
 }
