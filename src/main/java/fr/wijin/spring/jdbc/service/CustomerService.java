@@ -38,4 +38,8 @@ public class CustomerService {
 		return customerDao.findCustomerById(id);
 	}
 
+	public List<Customer> updateAllCustomersName(String newName, List<Customer> customers) {
+		return customerDao.updateAllCustomersName(newName, customers);
+	}
+
 }

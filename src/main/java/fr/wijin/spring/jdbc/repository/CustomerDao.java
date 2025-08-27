@@ -16,4 +16,8 @@ public interface CustomerDao {
 
     public Customer findCustomerById(int id);
 
+     public Customer findCustomerByIdNamedParam(int id);
+
+     public List<Customer> updateAllCustomersName(String newName, List<Customer> customers);
+
 }

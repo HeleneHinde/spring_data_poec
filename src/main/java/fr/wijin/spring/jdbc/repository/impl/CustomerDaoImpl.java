@@ -8,6 +8,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.namedparam.SqlParameterSourceUtils;
 import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
@@ -17,9 +20,10 @@ import fr.wijin.spring.jdbc.repository.CustomerDao;
 @Repository
 public class CustomerDaoImpl implements CustomerDao {
 
-    private SimpleJdbcInsert customerInsert;
-
+    private final SimpleJdbcInsert customerInsert;
+    private final NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     private final JdbcTemplate jdbcTemplate;
+
     @Autowired
     private RowMapper<Customer> customerRowMapper;
 
@@ -29,6 +33,7 @@ public class CustomerDaoImpl implements CustomerDao {
         this.customerInsert = new SimpleJdbcInsert(jdbcTemplate)
                 .withTableName("CUSTOMERS")
                 .usingGeneratedKeyColumns("ID");
+        this.namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(dataSource);
     }
 
     @Override
@@ -82,4 +87,25 @@ public class CustomerDaoImpl implements CustomerDao {
         return jdbcTemplate.queryForObject(sql, customerRowMapper, id);
     }
 
+    @Override
+    public Customer findCustomerByIdNamedParam(int id) {
+        String sql = "SELECT * FROM CUSTOMERS WHERE ID = :id";
+        return namedParameterJdbcTemplate.queryForObject(sql, Map.of("id", id), customerRowMapper);
+    }
+
+    @Override
+    public List<Customer> updateAllCustomersName(String newName, List<Customer> customers) {
+
+        for(Customer customer : customers){
+            customer.setLastname(newName+' '+customer.getLastname());
+        }
+        
+        SqlParameterSource [] batch = SqlParameterSourceUtils.createBatch(customers.toArray());
+        String sql = "update CUSTOMERS set LASTNAME = :lastname";
+       int [] updateCount = namedParameterJdbcTemplate.batchUpdate(sql, batch);
+
+        return customers;
+    }
+
+    
 }
