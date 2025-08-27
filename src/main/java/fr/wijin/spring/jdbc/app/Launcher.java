@@ -52,8 +52,10 @@ public class Launcher {
 		customer.setActive(true);
 		customer.setNotes("No notes");
 		System.out.println(service.insertSimpleCustomer(customer));
+		System.out.println(customer.getId());
 		System.out.println(service.getCustomerCount());
 		System.out.println(service.getAllCustomers());
+		System.err.println(service.getCustomerById(2));
 
 	}
 }

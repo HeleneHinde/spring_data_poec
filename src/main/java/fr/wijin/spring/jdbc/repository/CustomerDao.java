@@ -14,4 +14,6 @@ public interface CustomerDao {
 
     public Customer insertSimpleCustomer(Customer customer);
 
+    public Customer findCustomerById(int id);
+
 }

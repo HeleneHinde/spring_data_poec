@@ -28,7 +28,6 @@ public class AppConfig {
 		var ds = new DriverManagerDataSource();
 		ds.setDriverClassName(
 				org.h2.Driver.class.getName());
-		// "org.h2.Driver"
 		ds.setUsername("sa");
 		ds.setPassword("");
 		/*

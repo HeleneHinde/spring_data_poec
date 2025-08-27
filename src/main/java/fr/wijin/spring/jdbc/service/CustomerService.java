@@ -34,4 +34,8 @@ public class CustomerService {
 		return customerDao.insertSimpleCustomer(customer);
 	}
 
+	public Customer getCustomerById(int id) {
+		return customerDao.findCustomerById(id);
+	}
+
 }

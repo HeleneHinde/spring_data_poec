@@ -59,7 +59,8 @@ public class CustomerDaoImpl implements CustomerDao {
 
     @Override
     public Customer insertSimpleCustomer(Customer customer) {
-        customerInsert.execute(getSqlParams(customer));
+        Number newId = customerInsert.executeAndReturnKey(getSqlParams(customer));
+        customer.setId(newId.intValue());
         return customer;
     }
 
@@ -73,6 +74,12 @@ public class CustomerDaoImpl implements CustomerDao {
                 "ACTIVE", customer.getActive(),
                 "NOTES", customer.getNotes()
         );
+    }
+
+    @Override
+    public Customer findCustomerById(int id) {
+        String sql = "SELECT * FROM CUSTOMERS WHERE ID = ?";
+        return jdbcTemplate.queryForObject(sql, customerRowMapper, id);
     }
 
 }

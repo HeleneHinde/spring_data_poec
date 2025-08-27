@@ -126,7 +126,7 @@ public class Customer implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Customer [id=" + id + ", lastname=" + lastname + ", firstname=" + firstname + ", company=" + company
+		return "\n Customer [id=" + id + ", lastname=" + lastname + ", firstname=" + firstname + ", company=" + company
 				+ ", mail=" + mail + ", phone=" + phone + ", mobile=" + mobile + ", notes=" + notes + ", active="
 				+ active + "]";
 	}
