@@ -1,12 +1,14 @@
 package fr.wijin.spring.jdbc.repository.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.simple.SimpleJdbcInsert;
 import org.springframework.stereotype.Repository;
 
 import fr.wijin.spring.jdbc.model.Customer;
@@ -15,6 +17,8 @@ import fr.wijin.spring.jdbc.repository.CustomerDao;
 @Repository
 public class CustomerDaoImpl implements CustomerDao {
 
+    private SimpleJdbcInsert customerInsert;
+
     private final JdbcTemplate jdbcTemplate;
     @Autowired
     private RowMapper<Customer> customerRowMapper;
@@ -22,6 +26,9 @@ public class CustomerDaoImpl implements CustomerDao {
     @Autowired
     public CustomerDaoImpl(DataSource dataSource) {
         this.jdbcTemplate = new JdbcTemplate(dataSource);
+        this.customerInsert = new SimpleJdbcInsert(jdbcTemplate)
+                .withTableName("CUSTOMERS")
+                .usingGeneratedKeyColumns("ID");
     }
 
     @Override
@@ -48,6 +55,24 @@ public class CustomerDaoImpl implements CustomerDao {
                 customer.getActive(),
                 customer.getNotes());
         return customer;
+    }
+
+    @Override
+    public Customer insertSimpleCustomer(Customer customer) {
+        customerInsert.execute(getSqlParams(customer));
+        return customer;
+    }
+
+    private Map<String, ?> getSqlParams(Customer customer) {
+        return Map.of(
+                "FIRSTNAME", customer.getFirstname(),
+                "LASTNAME", customer.getLastname(),
+                "MAIL", customer.getMail(),
+                "PHONE", customer.getPhone(),
+                "COMPANY", customer.getCompany(),
+                "ACTIVE", customer.getActive(),
+                "NOTES", customer.getNotes()
+        );
     }
 
 }

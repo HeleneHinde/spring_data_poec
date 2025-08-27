@@ -29,4 +29,9 @@ public class CustomerService {
 	public Customer insertCustomer(Customer customer) {
 		return customerDao.insertCustomer(customer);
 	}
+
+	public Customer insertSimpleCustomer(Customer customer) {
+		return customerDao.insertSimpleCustomer(customer);
+	}
+
 }

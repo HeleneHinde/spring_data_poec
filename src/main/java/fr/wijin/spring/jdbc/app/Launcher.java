@@ -44,14 +44,14 @@ public class Launcher {
 		} */
 
 		Customer customer = new Customer();
-		customer.setFirstname("John");
-		customer.setLastname("Doe");
-		customer.setMail("john.doe@example.com");
+		customer.setFirstname("Jane");
+		customer.setLastname("Dark");
+		customer.setMail("jane.dark@example.com");
 		customer.setPhone("1234567890");
 		customer.setCompany("Example Corp");
 		customer.setActive(true);
 		customer.setNotes("No notes");
-		System.out.println(service.insertCustomer(customer));
+		System.out.println(service.insertSimpleCustomer(customer));
 		System.out.println(service.getCustomerCount());
 		System.out.println(service.getAllCustomers());
 
