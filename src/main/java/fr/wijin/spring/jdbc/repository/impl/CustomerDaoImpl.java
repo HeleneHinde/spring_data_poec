@@ -96,13 +96,15 @@ public class CustomerDaoImpl implements CustomerDao {
     @Override
     public List<Customer> updateAllCustomersName(String newName, List<Customer> customers) {
 
-        for(Customer customer : customers){
+        //version 1
+/*         for(Customer customer : customers){
             customer.setLastname(newName+' '+customer.getLastname());
-        }
+        } */
         
+        //version 2
         SqlParameterSource [] batch = SqlParameterSourceUtils.createBatch(customers.toArray());
-        String sql = "update CUSTOMERS set LASTNAME = :lastname";
-       int [] updateCount = namedParameterJdbcTemplate.batchUpdate(sql, batch);
+        String sql = "update CUSTOMERS set LASTNAME = CONCAT('" + newName + " ', :lastname) where id = :id";
+        int [] updateCount = namedParameterJdbcTemplate.batchUpdate(sql, batch);
 
         return customers;
     }

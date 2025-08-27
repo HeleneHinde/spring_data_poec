@@ -57,7 +57,7 @@ public class Launcher {
 		System.out.println(service.getAllCustomers());
 		System.err.println(service.getCustomerById(2));
 
-		service.updateAllCustomersName("DE", service.getAllCustomers());
+		service.updateAllCustomersName("DON", service.getAllCustomers());
 
 		System.out.println(service.getAllCustomers());
 	}
