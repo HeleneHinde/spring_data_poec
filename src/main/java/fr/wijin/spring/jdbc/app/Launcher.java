@@ -1,9 +1,5 @@
 package fr.wijin.spring.jdbc.app;
 
-import java.sql.SQLException;
-
-import javax.sql.DataSource;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -46,6 +42,7 @@ public class Launcher {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} */
+
 		Customer customer = new Customer();
 		customer.setFirstname("John");
 		customer.setLastname("Doe");

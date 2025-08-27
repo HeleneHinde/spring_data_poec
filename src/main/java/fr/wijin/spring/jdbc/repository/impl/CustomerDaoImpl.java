@@ -4,13 +4,11 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.h2.result.Row;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
-import fr.wijin.spring.jdbc.mapper.CustomerRowMapper;
 import fr.wijin.spring.jdbc.model.Customer;
 import fr.wijin.spring.jdbc.repository.CustomerDao;
 
